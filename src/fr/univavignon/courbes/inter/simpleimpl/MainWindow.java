@@ -1,5 +1,4 @@
 package fr.univavignon.courbes.inter.simpleimpl;
-
 /*
  * Courbes
  * Copyright 2015-16 L3 Info UAPV 2015-16
@@ -48,6 +47,7 @@ import fr.univavignon.courbes.inter.simpleimpl.remote.server.ServerGameRoundPane
 import fr.univavignon.courbes.network.ClientCommunication;
 import fr.univavignon.courbes.network.ServerCommunication;
 
+import fr.univavignon.courbes.inter.central.ServerListPanel;
 /**
  * Menu principal du jeu.
  * 
@@ -166,6 +166,11 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 		/** Aire de jeu d'une partie réseau côté client */
 		CLIENT_GAME_PLAY,
 		
+		
+		/** Liste les servers joignables */
+		SERVER_LIST,
+		
+		
 		/** Liste des profils */
 		PROFILE_LIST,
 		/** Affichage des statistiques */
@@ -216,6 +221,9 @@ public class MainWindow extends JFrame implements ErrorHandler, WindowListener
 				break;
 			case PROFILE_LIST:
 				currentPanel = new ProfileListPanel(this);
+				break;
+			case SERVER_LIST:
+				currentPanel = new ServerListPanel(this);
 				break;
 			case STATISTICS:
 				System.out.println("Option pas encore implémentée...");
