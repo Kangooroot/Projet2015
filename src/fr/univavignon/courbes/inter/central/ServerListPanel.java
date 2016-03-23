@@ -44,8 +44,8 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	
 	@Override
 	protected void previousStep()
-	{	mainWindow.clientPlayer = null;
-		mainWindow.displayPanel(PanelName.MAIN_MENU);
+	{
+		mainWindow.displayPanel(PanelName.CLIENT_GAME_PLAYER_SELECTION);
 	}
 	
 	@Override
