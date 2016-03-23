@@ -8,12 +8,13 @@ import java.awt.event.ItemListener;
 import javax.swing.*;
 
 import fr.univavignon.courbes.common.Player;
+import fr.univavignon.courbes.inter.simpleimpl.AbstractConfigurationPanel;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow.PanelName;
 import fr.univavignon.courbes.inter.simpleimpl.local.AbstractLocalPlayerSelectionPanel;
 import fr.univavignon.courbes.inter.simpleimpl.local.LocalPlayerConfigPanel;
 
-public class ServerListPanel extends AbstractLocalPlayerSelectionPanel implements ItemListener
+public class ServerListPanel extends AbstractConfigurationPanel implements ItemListener
 {
 	/** Numéro de série */
 	private static final long serialVersionUID = 100L;
@@ -52,7 +53,7 @@ public class ServerListPanel extends AbstractLocalPlayerSelectionPanel implement
 	{
 		
 	}
-	
+	/*
 	@Override
 	public int getMinPlayerNbr()
 	{	return MIN_PLYR_NBR;
@@ -67,18 +68,18 @@ public class ServerListPanel extends AbstractLocalPlayerSelectionPanel implement
 	protected String getComboText()
 	{	return COMBO_TEXT;
 	}
-	
+	*/
 	@Override
 	protected void initContent()
-	{	super.initContent();
+	{	/*super.initContent();*/
 		
 		// on désactive le combo
-		playerNbrCombo.setEnabled(false);
-		comboLabel.setEnabled(false);
+		/*playerNbrCombo.setEnabled(false);
+		comboLabel.setEnabled(false);*/
 		
 		// on sort les couleurs
-		for(LocalPlayerConfigPanel lpcp: selectedProfiles)
-			lpcp.removeColor();
+		/*for(LocalPlayerConfigPanel lpcp: selectedProfiles)
+			lpcp.removeColor();*/
 		
 		// on rajoute la check box
 		Dimension winDim = mainWindow.getPreferredSize();

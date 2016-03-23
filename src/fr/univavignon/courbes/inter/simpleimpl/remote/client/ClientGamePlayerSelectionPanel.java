@@ -138,7 +138,7 @@ public class ClientGamePlayerSelectionPanel extends AbstractLocalPlayerSelection
 				// TODO à compléter avec le traitement relatif au serveur central :
 				// il faut afficher un panel qui va se connecter au central et faire le traitement approprié
 				//mainWindow.displayPanel(PanelName.XXXXXXXXXX);
-				
+				mainWindow.displayPanel(PanelName.SERVER_LIST);
 			}
 		}
 		else
