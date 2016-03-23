@@ -18,6 +18,7 @@ package fr.univavignon.courbes.inter.simpleimpl;
  * along with Courbes. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -95,8 +96,8 @@ public abstract class AbstractConfigurationPanel extends JPanel implements Actio
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		Font font = titleLabel.getFont();
-		font = new Font(font.getName(),Font.PLAIN,20);
-		titleLabel.setFont(font);
+		font = new Font("Liberation sans",Font.BOLD,20);
+		titleLabel.setFont(new Font("Liberation sans",Font.BOLD,22));
 		
 		Dimension winDim = mainWindow.getPreferredSize();
 		Dimension dim = new Dimension(winDim.width,30);
@@ -127,15 +128,21 @@ public abstract class AbstractConfigurationPanel extends JPanel implements Actio
 		buttonPanel.setLayout(layout);
 		add(buttonPanel);
 
-		backButton = new JButton("Retour");
+		backButton = new JButton("◄ Retour");
 		backButton.addActionListener(this);
 		buttonPanel.add(backButton);
+		backButton.setForeground(new Color(255,219,0));
+		backButton.setBackground(new Color(152,0,0));
+		backButton.setFont(new Font("Verdana", Font.BOLD, 16));
 		
 		buttonPanel.add(Box.createHorizontalGlue());
 		
-		nextButton = new JButton("Continuer");
+		nextButton = new JButton("Continuer ►");
 		nextButton.addActionListener(this);
 		buttonPanel.add(nextButton);
+		nextButton.setForeground(new Color(255,219,0));
+		nextButton.setBackground(new Color(0,105,7));
+		nextButton.setFont(new Font("Verdana", Font.BOLD, 16));
 	}
 	
 	/**

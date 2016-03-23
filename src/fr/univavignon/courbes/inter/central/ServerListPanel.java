@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -13,6 +14,7 @@ import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow.PanelName;
 import fr.univavignon.courbes.inter.simpleimpl.local.AbstractLocalPlayerSelectionPanel;
 import fr.univavignon.courbes.inter.simpleimpl.local.LocalPlayerConfigPanel;
+import fr.univavignon.courbes.network.central.HttpRequests;
 
 public class ServerListPanel extends AbstractConfigurationPanel implements ItemListener
 {
@@ -21,15 +23,11 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	/** Title du panel */
 	private static final String TITLE = "Liste des serveurs disponibles";
 	/** Nombre de serveurs */
-	private static final int SERVER_NBR = 1;
-	/** Nombre minimal de joueurs recquis pour la partie */
-	private static final int MIN_PLYR_NBR = 1;
-	/** Nombre maximal de joueurs autorisé pour la partie */
-	private static final int MAX_PLYR_NBR = 1;
+	private static int SERVER_NB = 0;
 	/** Texte associé à la combobox */
 	private static final String COMBO_TEXT = "Nombre de joueurs : ";
-	/** Title du panel */
-	private static final String BOX_LABEL = "Connexion directe : ";
+	
+	
 	
 	/**
 	 * Crée et initialise le panel permettant de sélectionner
@@ -40,6 +38,12 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	 */
 	public ServerListPanel (MainWindow mainWindow)
 	{	super(mainWindow,TITLE);
+		try {
+			SERVER_NB = Integer.parseInt(HttpRequests.get("connection.php?req=server_nbr"));
+		}
+		catch(IOException e) {
+			System.out.println(e);
+		}
 	}
 	
 	@Override
@@ -53,22 +57,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	{
 		
 	}
-	/*
-	@Override
-	public int getMinPlayerNbr()
-	{	return MIN_PLYR_NBR;
-	}
-	
-	@Override
-	protected int getMaxPlayerNbr()
-	{	return MAX_PLYR_NBR;
-	}
 
-	@Override
-	protected String getComboText()
-	{	return COMBO_TEXT;
-	}
-	*/
 	@Override
 	protected void initContent()
 	{	/*super.initContent();*/
@@ -93,9 +82,6 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		panel.setPreferredSize(dim);
 		panel.setMaximumSize(dim);
 		panel.setMinimumSize(dim);
-		
-		JLabel publicLabel = new JLabel(BOX_LABEL);
-		panel.add(publicLabel);
 		
 		
 		add(panel);
