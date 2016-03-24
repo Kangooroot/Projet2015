@@ -1,6 +1,8 @@
 package fr.univavignon.courbes.inter.central;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -22,10 +24,8 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	private static final long serialVersionUID = 100L;
 	/** Title du panel */
 	private static final String TITLE = "Liste des serveurs disponibles";
-	/** Nombre de serveurs */
-	private static int SERVER_NB = 0;
-	/** Texte associé à la combobox */
-	private static final String COMBO_TEXT = "Nombre de joueurs : ";
+	/** Liste des serveurs */
+	private static String[] servers;
 	
 	
 	
@@ -38,12 +38,14 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	 */
 	public ServerListPanel (MainWindow mainWindow)
 	{	super(mainWindow,TITLE);
-		try {
-			SERVER_NB = Integer.parseInt(HttpRequests.get("connection.php?req=server_nbr"));
+		/*try {
+			String get = HttpRequests.get("connection.php?req=server_nbr");
+			servers = get.split("\\|", -1);
 		}
 		catch(IOException e) {
 			System.out.println(e);
-		}
+			
+		}*/
 	}
 	
 	@Override
@@ -60,17 +62,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 
 	@Override
 	protected void initContent()
-	{	/*super.initContent();*/
-		
-		// on désactive le combo
-		/*playerNbrCombo.setEnabled(false);
-		comboLabel.setEnabled(false);*/
-		
-		// on sort les couleurs
-		/*for(LocalPlayerConfigPanel lpcp: selectedProfiles)
-			lpcp.removeColor();*/
-		
-		// on rajoute la check box
+	{
 		Dimension winDim = mainWindow.getPreferredSize();
 		Dimension dim;
 		int height = 30;
@@ -83,7 +75,34 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		panel.setMaximumSize(dim);
 		panel.setMinimumSize(dim);
 		
+		String get = "server1|server1|server1|server1|server1";
+		servers = get.split("\\|", -1);
 		
+		JPanel serverPanel = new JPanel();
+		serverPanel.setLayout(new FlowLayout());
+		/*JPanel[] s = new JPanel[servers.length];*/
+		if(servers.length > 0)
+		{
+			for(int i = 0; i < servers.length; i++)
+			{
+				/*s[i] = new JPanel();
+				JLabel lbl = new JLabel(servers[i]);
+				s[i].add(lbl);
+				serverPanel.add(s[i]);*/
+				JPanel j = new JPanel();
+				JLabel lbl = new JLabel(servers[i]);
+				j.add(lbl);
+				serverPanel.add(j);
+			}
+		}
+		else {
+			JPanel noServerPanel = new JPanel();
+			JLabel noServerLabel = new JLabel("Il n'y a pas de serveurs actuellement");
+			noServerLabel.setForeground(Color.RED);
+			noServerPanel.add(noServerLabel);
+		}
+		
+		panel.add(serverPanel);
 		add(panel);
 	}
 	
