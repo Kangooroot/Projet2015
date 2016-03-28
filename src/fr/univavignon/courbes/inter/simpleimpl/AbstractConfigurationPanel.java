@@ -96,7 +96,6 @@ public abstract class AbstractConfigurationPanel extends JPanel implements Actio
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		Font font = titleLabel.getFont();
-		font = new Font("Liberation sans",Font.BOLD,20);
 		titleLabel.setFont(new Font("Liberation sans",Font.BOLD,22));
 		
 		Dimension winDim = mainWindow.getPreferredSize();
@@ -128,7 +127,7 @@ public abstract class AbstractConfigurationPanel extends JPanel implements Actio
 		buttonPanel.setLayout(layout);
 		add(buttonPanel);
 
-		backButton = new JButton("◄ Retour");
+		backButton = new JButton("< Retour");
 		backButton.addActionListener(this);
 		buttonPanel.add(backButton);
 		backButton.setForeground(new Color(255,219,0));
@@ -137,7 +136,7 @@ public abstract class AbstractConfigurationPanel extends JPanel implements Actio
 		
 		buttonPanel.add(Box.createHorizontalGlue());
 		
-		nextButton = new JButton("Continuer ►");
+		nextButton = new JButton("Continuer >");
 		nextButton.addActionListener(this);
 		buttonPanel.add(nextButton);
 		nextButton.setForeground(new Color(255,219,0));

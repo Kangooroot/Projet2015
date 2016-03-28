@@ -96,7 +96,8 @@ public class ClientGamePlayerSelectionPanel extends AbstractLocalPlayerSelection
 		panel.add(publicLabel);
 		
 		publicBox = new JCheckBox();
-		publicBox.setSelected(true);
+		/* Changé la box pour qu'elle soit décochée par défaut */
+		publicBox.setSelected(false);
 		publicBox.addItemListener(this);
 		panel.add(publicBox);
 		
@@ -134,10 +135,10 @@ public class ClientGamePlayerSelectionPanel extends AbstractLocalPlayerSelection
 				mainWindow.displayPanel(PanelName.CLIENT_GAME_CONNECTION);
 			// connexion via le central
 			else
-			{	System.out.println("Fonctionnalité implémentée !");
+			{	//System.out.println("Fonctionnalité implémentée !");
 				// TODO à compléter avec le traitement relatif au serveur central :
 				// il faut afficher un panel qui va se connecter au central et faire le traitement approprié
-				//mainWindow.displayPanel(PanelName.XXXXXXXXXX);
+				// mainWindow.displayPanel(PanelName.XXXXXXXXXX);
 				mainWindow.displayPanel(PanelName.SERVER_LIST);
 			}
 		}
