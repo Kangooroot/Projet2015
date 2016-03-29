@@ -13,12 +13,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
@@ -72,11 +76,17 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 		else setBackground(new Color(105,173,216));
 		
 		JPanel namePanel = new JPanel();
+		JLabel lock = new JLabel();
+		lock.setBorder(new EmptyBorder(0,10,0,0));
+		
 		namePanel.setOpaque(false);
 		nameLabel = new JLabel(name);
 		nameLabel.setFont(new Font("Liberation sans",Font.BOLD,15));
 		nameLabel.setForeground(new Color(0,48,103));
-		nameLabel.setBorder(new EmptyBorder(0,30,0,0));
+		nameLabel.setBorder(new EmptyBorder(0,10,0,0));
+		if(password.equals("_NO_PWD_")) {nameLabel.setBorder(new EmptyBorder(0,30,0,0));}
+		else {lock.setIcon(new ImageIcon("res/images/icon_lock.png"));}
+		namePanel.add(lock);
 		namePanel.add(nameLabel);
 		
 		JPanel passwordPanel = new JPanel();
@@ -110,6 +120,8 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 			@Override
 	        public void mouseClicked(MouseEvent e) {
 				nextStep();
+				if(!password.equals("_NO_PWD_") && PasswordArea.getFocused()!=null && passwordArea != PasswordArea.getFocused()) PasswordArea.getFocused().setVisible(false);
+				PasswordArea.setFocused(passwordArea);
 			}
 
 	        @Override
@@ -141,9 +153,10 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 	private final void nextStep()
 	{
 		if(password.equals("_NO_PWD_")) {connect();}
-		else {
+		else if (passwordArea.isVisible() == false){
 			passwordArea.setVisible(true);
 		}
+		else {passwordArea.setVisible(false);}
 	}
 	
 	@Override

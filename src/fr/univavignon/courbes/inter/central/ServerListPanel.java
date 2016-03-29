@@ -79,6 +79,8 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		panel.setMaximumSize(dim);
 		panel.setMinimumSize(dim);
 		
+		try {String getServers = HttpRequests.get("");}
+		catch(IOException e) {System.out.println(e);}
 		String get = "server1,_NO_PWD_,1,3,155.522.548.265,9999|"
 				+ "server2,_NO_PWD_,5,5,155.522.548.265,9999|"
 				+ "server3,ceri,1,3,155.522.548.265,9999|"
@@ -113,8 +115,8 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		refreshButtonPanel.setOpaque(false);
 		refreshButton = new JButton("Refresh");
 		refreshButton.addActionListener(this);
-		refreshButton.setPreferredSize(new Dimension(120, 35));
-		refreshButton.setMaximumSize(new Dimension(120, 35));
+		refreshButton.setPreferredSize(new Dimension(120, 25));
+		refreshButton.setMaximumSize(new Dimension(120, 25));
 		refreshButtonPanel.add(refreshButton);
 		top.add(refreshButtonPanel, BorderLayout.CENTER);
 		JLabel topLabelCapa = new JLabel("Capacité");
