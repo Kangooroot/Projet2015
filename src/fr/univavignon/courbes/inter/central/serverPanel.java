@@ -2,18 +2,23 @@ package fr.univavignon.courbes.inter.central;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
@@ -36,11 +41,14 @@ import fr.univavignon.courbes.network.simpleimpl.client.ClientCommunicationImpl;
 public class serverPanel extends JPanel implements ItemListener, ClientConnectionHandler
 {
 	private final MainWindow mainWindow;
+	private final String name;
+	private final String password;
 	private final int parity;
 	private final int players;
 	private final int maxPlayers;
 	private final JLabel nameLabel;
 	private final JLabel capacityLabel;
+	private final PasswordArea passwordArea;
 	
 	private final String serverIP;
 	private final String serverPort;
@@ -49,10 +57,13 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 	{
 		this.mainWindow = mainWindow;
 		parity = i;
-		players = Integer.parseInt(servers[i][1]);
-		maxPlayers =  Integer.parseInt(servers[i][2]);
-		serverIP = servers[i][3];
-		serverPort = servers[i][4];
+		name = servers[i][0];
+		password = servers[i][1];
+		System.out.println(servers[i][1]);
+		players = Integer.parseInt(servers[i][2]);
+		maxPlayers =  Integer.parseInt(servers[i][3]);
+		serverIP = servers[i][4];
+		serverPort = servers[i][5];
 		
 		setPreferredSize(new Dimension(mainWindow.getPreferredSize().width, 30));
 		setMaximumSize(new Dimension(mainWindow.getPreferredSize().width, 30));
@@ -62,14 +73,28 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 		
 		JPanel namePanel = new JPanel();
 		namePanel.setOpaque(false);
-		nameLabel = new JLabel(servers[i][0]);
+		nameLabel = new JLabel(name);
 		nameLabel.setFont(new Font("Liberation sans",Font.BOLD,15));
 		nameLabel.setForeground(new Color(0,48,103));
 		nameLabel.setBorder(new EmptyBorder(0,30,0,0));
 		namePanel.add(nameLabel);
 		
+		JPanel passwordPanel = new JPanel();
+		passwordPanel.setOpaque(false);
+		passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+		/*passwordArea = new PasswordArea(password);
+		passwordArea.setFont(new Font("Liberation sans",Font.BOLD,15));
+		passwordArea.setForeground(new Color(0,124,199));
+		passwordArea.setPreferredSize(new Dimension(400, 30));
+		passwordArea.setMaximumSize(new Dimension(400, 30));
+		passwordArea.setVisible(false);*/
+		passwordArea = new PasswordArea(mainWindow, password, this);
+		passwordPanel.setBorder(new EmptyBorder(0,30,0,0));
+		passwordPanel.add(passwordArea);
+		
+		
 		JPanel capacityPanel = new JPanel();
-		capacityLabel = new JLabel(servers[i][1]+" / "+servers[i][2]);
+		capacityLabel = new JLabel(players+" / "+maxPlayers);
 		capacityLabel.setFont(new Font("Liberation sans",Font.BOLD,15));
 		capacityLabel.setForeground(new Color(0,77,126));
 		capacityPanel.setOpaque(false);
@@ -77,6 +102,7 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 		capacityPanel.add(capacityLabel);
 		
 		add(namePanel, BorderLayout.WEST);
+		add(passwordPanel, BorderLayout.CENTER);
 		add(capacityPanel, BorderLayout.EAST);
 		//serverPanel.add(server);
 		
@@ -114,13 +140,9 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 	
 	private final void nextStep()
 	{
-		if(players >= maxPlayers) {
-		JOptionPane.showMessageDialog(mainWindow, 
-			"<html>Le maximum de joueurs a déja été atteint pour ce serveur" +
-			"<br/><center><b>"+players+" / "+maxPlayers+"</b></center></html>");
-		}
-		else if(0 < players && players < maxPlayers) {
-			mainWindow.displayPanel(PanelName.CLIENT_GAME_PLAYER_SELECTION);
+		if(password.equals("_NO_PWD_")) {connect();}
+		else {
+			passwordArea.setVisible(true);
 		}
 	}
 	
@@ -136,7 +158,7 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 	 * @return
 	 * 		Indique si on a au moins pu établir une connexion au serveur ({@code true}) ou pas ({@code false}).
 	 */
-	private boolean connect()
+	public boolean connect()
 	{	// on initialise le Moteur Réseau
 		ClientCommunication clientCom = null;
 		NetEngineImpl netEngineImpl = SettingsManager.getNetEngineImpl();
@@ -190,3 +212,4 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 	    });
 	}
 }
+

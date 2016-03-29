@@ -5,12 +5,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -29,7 +30,7 @@ import fr.univavignon.courbes.network.central.HttpRequests;
  * 
  * @author	uapv1400768 - DRISSI Rémi
  */
-public class ServerListPanel extends AbstractConfigurationPanel implements ItemListener
+public class ServerListPanel extends AbstractConfigurationPanel implements ItemListener, ActionListener
 {
 	/** Numéro de série */
 	private static final long serialVersionUID = 100L;
@@ -38,7 +39,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	/** Liste des serveurs */
 	private static String[][] servers;
 	
-	
+	private JButton refreshButton;
 	
 	/**
 	 * Crée et initialise le panel permettant de sélectionner
@@ -78,14 +79,16 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		panel.setMaximumSize(dim);
 		panel.setMinimumSize(dim);
 		
-		String get = "server1,1,3|server2,5,5|server3,1,3|server4,1,3";
+		String get = "server1,_NO_PWD_,1,3,155.522.548.265,9999|"
+				+ "server2,_NO_PWD_,5,5,155.522.548.265,9999|"
+				+ "server3,ceri,1,3,155.522.548.265,9999|"
+				+ "server4,cericeri,1,3,155.522.548.265,9999";
 		String[] first_parse;
 		first_parse = get.split("\\|", -1);
 		servers = new String[first_parse.length][];
 		for(int i = 0; i < first_parse.length; i++) {
 			servers[i] = first_parse[i].split(",");
 		}
-		
 		JPanel serverPanel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane(serverPanel);
 		scrollPane.setBackground(new Color(0,63,122));
@@ -105,6 +108,15 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		topLabelName.setFont(new Font("Liberation sans",Font.BOLD,17));
 		topLabelName.setForeground(Color.WHITE);
 		topLabelName.setOpaque(false);
+
+		JPanel refreshButtonPanel = new JPanel();
+		refreshButtonPanel.setOpaque(false);
+		refreshButton = new JButton("Refresh");
+		refreshButton.addActionListener(this);
+		refreshButton.setPreferredSize(new Dimension(120, 35));
+		refreshButton.setMaximumSize(new Dimension(120, 35));
+		refreshButtonPanel.add(refreshButton);
+		top.add(refreshButtonPanel, BorderLayout.CENTER);
 		JLabel topLabelCapa = new JLabel("Capacité");
 		topLabelCapa.setBorder(new EmptyBorder(0,0,0,30));
 		topLabelCapa.setFont(new Font("Liberation sans",Font.BOLD,17));
@@ -160,11 +172,10 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		font = new Font(font.getName(),Font.PLAIN,25);
 		result.setFont(font);
 		
-		Dimension dim = new Dimension(400,50);
+		Dimension dim = new Dimension(100,30);
 		result.setMaximumSize(dim);
 		result.setMinimumSize(dim);
 		result.setPreferredSize(dim);
-		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		result.addActionListener(this);
 		
@@ -173,8 +184,18 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	
 	
 	@Override
-	public void itemStateChanged(ItemEvent e)
+	public void itemStateChanged(ItemEvent e) {}
+	
+	@Override
+	public void actionPerformed(ActionEvent e)
 	{
-		
+		if(e.getSource()==refreshButton)
+		{
+			mainWindow.displayPanel(PanelName.SERVER_LIST);
+		}
+		if(e.getSource()==backButton)
+		{
+			previousStep();
+		}
 	}
 }
