@@ -19,12 +19,19 @@ package fr.univavignon.courbes.inter.simpleimpl.remote.server;
  */
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import fr.univavignon.courbes.common.Constants;
 import fr.univavignon.courbes.common.Round;
+import fr.univavignon.courbes.inter.ClientConnectionHandler;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
+import fr.univavignon.courbes.inter.simpleimpl.SettingsManager;
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow.PanelName;
+import fr.univavignon.courbes.inter.simpleimpl.SettingsManager.NetEngineImpl;
 import fr.univavignon.courbes.inter.simpleimpl.local.AbstractLocalPlayerSelectionPanel;
+import fr.univavignon.courbes.network.ClientCommunication;
+import fr.univavignon.courbes.network.kryonet.ClientCommunicationKryonetImpl;
+import fr.univavignon.courbes.network.simpleimpl.client.ClientCommunicationImpl;
 
 /**
  * Panel permettant de sélectionner les joueurs locaux au serveur participant à une partie réseau.
@@ -88,4 +95,7 @@ public class ServerGameLocalPlayerSelectionPanel extends AbstractLocalPlayerSele
 				"<br/>- toutes les commandes sont définies et différentes.</html>");
 		}
 	}
+	
+	
+	
 }

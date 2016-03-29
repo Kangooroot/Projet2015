@@ -49,14 +49,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	 */
 	public ServerListPanel (MainWindow mainWindow)
 	{	super(mainWindow,TITLE);
-		/*try {
-			String get = HttpRequests.get("connection.php?req=server_nbr");
-			servers = get.split("\\|", -1);
-		}
-		catch(IOException e) {
-			System.out.println(e);
-			
-		}*/
+		nextButton.setVisible(false);
 	}
 	
 	@Override
@@ -85,15 +78,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		panel.setMaximumSize(dim);
 		panel.setMinimumSize(dim);
 		
-		String get = "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3|"
-				+ "server1,1,3|server2,5,5|server3,1,3|server4,1,3";
+		String get = "server1,1,3|server2,5,5|server3,1,3|server4,1,3";
 		String[] first_parse;
 		first_parse = get.split("\\|", -1);
 		servers = new String[first_parse.length][];
@@ -184,11 +169,6 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		result.addActionListener(this);
 		
 		return result;
-	}
-	
-	private void initServerDisplay(JPanel serverPanel)
-	{
-		
 	}
 	
 	
