@@ -15,6 +15,9 @@ import javax.swing.KeyStroke;
 
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow;
 
+/**
+ * @author Rémi Drissi
+ */
 public class PasswordArea extends JTextArea implements KeyListener, FocusListener {
 
 	private final String password;
@@ -23,7 +26,14 @@ public class PasswordArea extends JTextArea implements KeyListener, FocusListene
 	private static PasswordArea focused = null;
 	private final String placeholder = "Mot de passe du serveur";
 
-	
+	/** Crée un champ de texte de type password
+	 * @param mainWindow
+	 * 	fenetre principale
+	 * @param password 
+	 * 	mot de passe du serveur
+	 * @param s 
+	 * 	contient ce champ de texte
+	 **/
     public PasswordArea(MainWindow mainWindow, String password, serverPanel s) {
     	setText(placeholder);
     	setForeground(new Color(200,200,200));
@@ -39,12 +49,25 @@ public class PasswordArea extends JTextArea implements KeyListener, FocusListene
 		setVisible(false);
     }
     
+    /** Get du champ selectionné
+	 * @return
+	 * 	retourne le cham pde texte actuellement selectionné
+	 **/
 	public static PasswordArea getFocused(){return focused;}
+	/** Set le champ selectionné
+	 * @param
+	 * 	passwordarea a selectionner
+	 **/
 	public static void setFocused(PasswordArea p){focused = p;}
 	
     @Override
     public void keyTyped(KeyEvent e) {
     }
+    
+    /** detecte l'appui sur une touche du clavier 
+     * 	
+     * Valide la conexion au serveur lors de l'appui sur la touche entrée
+     * **/
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -65,6 +88,7 @@ public class PasswordArea extends JTextArea implements KeyListener, FocusListene
         	}
         }
     }
+    
     @Override
     public void keyReleased(KeyEvent e) {
     }

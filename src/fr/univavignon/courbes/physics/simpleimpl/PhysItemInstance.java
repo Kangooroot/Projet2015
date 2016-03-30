@@ -24,6 +24,9 @@ import fr.univavignon.courbes.common.Constants;
 import fr.univavignon.courbes.common.ItemInstance;
 import fr.univavignon.courbes.common.ItemType;
 import fr.univavignon.courbes.common.Snake;
+import fr.univavignon.courbes.sounds.Son;
+import fr.univavignon.courbes.sounds.Sonbis;
+
 
 /**
  * Classe fille de {@link ItemInstance}, permettant d'intégrer
@@ -68,6 +71,8 @@ public class PhysItemInstance extends ItemInstance
 		
 		// on finit l'init
 		init(type,x,y);
+		Sonbis musiqueItem = new Son();
+		musiqueItem.ChoixMusique(1);
 	}
 	
 	/**

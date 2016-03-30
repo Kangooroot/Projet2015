@@ -33,6 +33,8 @@ import fr.univavignon.courbes.common.ItemInstance;
 import fr.univavignon.courbes.common.Position;
 import fr.univavignon.courbes.common.Snake;
 import fr.univavignon.courbes.inter.simpleimpl.SettingsManager;
+import fr.univavignon.courbes.sounds.Son;
+import fr.univavignon.courbes.sounds.Sonbis;
 
 /**
  * Classe fille de {@link Snake}, permettant d'intégrer
@@ -368,7 +370,10 @@ public class PhysSnake extends Snake
 					// on teste juste si le pixel du serpent est dans le rayon de l'item
 					double dist = Math.sqrt(Math.pow(item.x-pos.x,2)+Math.pow(item.y-pos.y,2));
 					if(dist<=Constants.ITEM_RADIUS)
-					{	// on indique qu'on a touché un item (pour sortir des deux boucles)
+					{	
+						Sonbis mItemPris = new Son();
+						mItemPris.ChoixMusique(6);
+						// on indique qu'on a touché un item (pour sortir des deux boucles)
 						itemCollided = true;
 						// on le sort de la liste des items encore en jeu
 						it.remove();
@@ -389,7 +394,10 @@ public class PhysSnake extends Snake
 					|| pos.y>=boardHeight-Constants.BORDER_THICKNESS
 					|| pos.x<=Constants.BORDER_THICKNESS
 					|| pos.x>=boardWidth-Constants.BORDER_THICKNESS)
-				{	// on marque la collision
+				{	
+					Sonbis mCrash = new Son();
+					mCrash.ChoixMusique(3);
+					// on marque la collision
 					eliminatedBy = -1;
 					result = true;
 					// on restreint la nouvelle position du serpent
@@ -407,7 +415,10 @@ public class PhysSnake extends Snake
 				{	boolean changed = physicalTrail.removeAll(snake.oldTrail)
 						|| physicalTrail.removeAll(snake.newTrail);
 					if(changed)
-					{	eliminatedBy = i;
+					{	
+						Sonbis mCrash = new Son();
+						mCrash.ChoixMusique(3);
+						eliminatedBy = i;
 						result = true;
 					}
 				}

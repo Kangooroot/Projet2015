@@ -44,19 +44,34 @@ import fr.univavignon.courbes.network.simpleimpl.client.ClientCommunicationImpl;
  */
 public class serverPanel extends JPanel implements ItemListener, ClientConnectionHandler
 {
+	/** Fenetre principale */
 	private final MainWindow mainWindow;
+	/** Nom du serveur */
 	private final String name;
+	/** Mot de passe */
 	private final String password;
+	/** Parité, permettant le changement de couleur */
 	private final int parity;
+	/** nombre de joueurs dans le lobby */
 	private final int players;
+	/** nombre max. de joueurs dans le lobby */
 	private final int maxPlayers;
+	/** Label qui contient le nom du serveur */
 	private final JLabel nameLabel;
+	/** Label qui contient la capacité du serveur */
 	private final JLabel capacityLabel;
+	/** Champ de texte qui devrait correspondre au mdp du serveur */
 	private final PasswordArea passwordArea;
-	
+	/** IP du serveur */
 	private final String serverIP;
+	/** Port du serveur */
 	private final String serverPort;
 	
+	/** Crée une ligne d'affichage de serveur
+	 * 	@param mainWindow	Fenetre de jeu
+	 * 	@param i	Indice de la ligne
+	 * 	@param servers	Liste les informations de tous les serveurs
+	 * */
 	serverPanel(MainWindow mainWindow, int i, String servers[][])
 	{
 		this.mainWindow = mainWindow;
@@ -114,8 +129,8 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 		add(namePanel, BorderLayout.WEST);
 		add(passwordPanel, BorderLayout.CENTER);
 		add(capacityPanel, BorderLayout.EAST);
-		//serverPanel.add(server);
 		
+		/** Détecte le passage de la souris */
 		addMouseListener(new MouseListener() {
 			@Override
 	        public void mouseClicked(MouseEvent e) {
@@ -149,7 +164,8 @@ public class serverPanel extends JPanel implements ItemListener, ClientConnectio
 	        }
 		});
 	}
-	
+	/** Définit les instructions à executer pour l'étape suivante
+	 * */
 	private final void nextStep()
 	{
 		if(password.equals("_NO_PWD_")) {connect();}

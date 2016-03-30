@@ -34,6 +34,9 @@ import javax.swing.JPanel;
 
 import fr.univavignon.courbes.inter.simpleimpl.MainWindow.PanelName;
 import fr.univavignon.courbes.inter.simpleimpl.profiles.ProfileManager;
+import fr.univavignon.courbes.sounds.Son;
+import fr.univavignon.courbes.sounds.Sonbis;
+
 
 /**
  * Panel contenant le menu principal du jeu.
@@ -149,7 +152,10 @@ public class MainMenuPanel extends JPanel implements ActionListener
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getSource()==localGameButton)	
+	{	
+		Sonbis mBouton = new Son();
+		mBouton.ChoixMusique(2);
+		if(e.getSource()==localGameButton)	
 		{	if(ProfileManager.getProfiles().size() > 1)
 			{	mainWindow.displayPanel(PanelName.LOCAL_GAME_PLAYER_SELECTION);
 			}

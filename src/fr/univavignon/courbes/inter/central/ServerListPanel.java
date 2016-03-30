@@ -38,7 +38,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	private static final String TITLE = "Liste des serveurs disponibles";
 	/** Liste des serveurs */
 	private static String[][] servers;
-	
+	/** Bouton de rafraîchissement des serveurs */
 	private JButton refreshButton;
 	
 	/**
@@ -60,10 +60,7 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 	}
 	
 	@Override
-	protected void nextStep()
-	{
-		
-	}
+	protected void nextStep() {}
 
 	@Override
 	protected void initContent()
@@ -84,7 +81,39 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		String get = "server1,_NO_PWD_,1,3,155.522.548.265,9999|"
 				+ "server2,_NO_PWD_,5,5,155.522.548.265,9999|"
 				+ "server3,ceri,1,3,155.522.548.265,9999|"
-				+ "server4,cericeri,1,3,155.522.548.265,9999";
+				+ "server4,cericeri,1,3,155.522.548.265,9999|"
+				+ "server5,cericeri,1,3,155.522.548.265,9999|"
+				+ "server6,_NO_PWD_,1,3,155.522.548.265,9999|"
+				+ "server7,cericeri,1,3,155.522.548.265,9999|"
+				+ "server8,cericeri,1,3,155.522.548.265,9999|"
+				+ "server9,cericeri,1,3,155.522.548.265,9999|"
+				+ "server10,cericeri,1,3,155.522.548.265,9999|"
+				+ "server11,_NO_PWD_,1,3,155.522.548.265,9999|"
+				+ "server12,_NO_PWD_,1,3,155.522.548.265,9999|"
+				+ "server13,cericeri,1,3,155.522.548.265,9999|"
+				+ "server14,cericeri,1,3,155.522.548.265,9999|"
+				+ "server15,cericeri,1,3,155.522.548.265,9999|"
+				+ "server16,cericeri,1,3,155.522.548.265,9999|"
+				+ "server17,cericeri,1,3,155.522.548.265,9999|"
+				+ "server18,cericeri,1,3,155.522.548.265,9999|"
+				+ "server19,_NO_PWD_,1,3,155.522.548.265,9999|"
+				+ "server20,_NO_PWD_,5,5,155.522.548.265,9999|"
+				+ "server21,ceri,1,3,155.522.548.265,9999|"
+				+ "server22,cericeri,1,3,155.522.548.265,9999|"
+				+ "server23,cericeri,1,3,155.522.548.265,9999|"
+				+ "server24,cericeri,1,3,155.522.548.265,9999|"
+				+ "server25,cericeri,1,3,155.522.548.265,9999|"
+				+ "server26,cericeri,1,3,155.522.548.265,9999|"
+				+ "server27,cericeri,1,3,155.522.548.265,9999|"
+				+ "server28,cericeri,1,3,155.522.548.265,9999|"
+				+ "server29,cericeri,1,3,155.522.548.265,9999|"
+				+ "server30,cericeri,1,3,155.522.548.265,9999|"
+				+ "server31,cericeri,1,3,155.522.548.265,9999|"
+				+ "server32,cericeri,1,3,155.522.548.265,9999|"
+				+ "server33,cericeri,1,3,155.522.548.265,9999|"
+				+ "server34,cericeri,1,3,155.522.548.265,9999|"
+				+ "server35,cericeri,1,3,155.522.548.265,9999|"
+				+ "server36,cericeri,1,3,155.522.548.265,9999";
 		String[] first_parse;
 		first_parse = get.split("\\|", -1);
 		servers = new String[first_parse.length][];
@@ -152,6 +181,12 @@ public class ServerListPanel extends AbstractConfigurationPanel implements ItemL
 		add(panel);
 	}
 	
+	/** Initialise un panel qui correspond à une ligne du tableau
+	 * 	@param servers
+	 * 		Liste des serveurs retournés par la base de données
+	 * 	@return
+	 * 		Le panel créé à partir des infos du serveur
+	 * */
 	private JPanel initServerPanel(String[][] servers)
 	{
 		JPanel serverPanel = new JPanel();
